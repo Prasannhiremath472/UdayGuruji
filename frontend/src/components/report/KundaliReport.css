@@ -1,0 +1,102 @@
+.kundali-report {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.report-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.report-logo {
+  height: 56px;
+  width: auto;
+}
+
+.report-main-title {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: var(--font-size-2xl);
+}
+
+.report-brand-name {
+  margin: var(--space-1) 0 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.report-footer {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
+.report-footer p {
+  margin: var(--space-1) 0;
+}
+
+@media (min-width: 768px) {
+  .kundali-report {
+    padding: var(--space-8);
+  }
+}
+
+/* A4 print rules: applied both to real browser printing (Ctrl+P) and to the
+   headless-Chromium PDF render, since pdfService.js emulates print media on
+   the same route. Keeping one stylesheet as the single source of truth. */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .a4-page {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .report-section {
+    page-break-inside: avoid;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Each divisional chart gets its own full print page: forcing a single
+     column keeps the diamond chart large and legible instead of two
+     charts being squeezed side by side at 768px+ (an A4 page is ~794px
+     wide, so the desktop 2-column rule would otherwise apply here too). */
+  .charts-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .chart-figure {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .chart-figure:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .chart-svg {
+    max-width: 100%;
+    width: 160mm;
+  }
+}

@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS kundali_planets (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  kundali_id INT UNSIGNED NOT NULL,
+  planet VARCHAR(30) NOT NULL,
+  sign VARCHAR(30) NOT NULL,
+  degree DECIMAL(6,3) NOT NULL,
+  house TINYINT UNSIGNED NOT NULL,
+  nakshatra VARCHAR(30) NULL,
+  nakshatra_pada TINYINT UNSIGNED NULL,
+  retrograde TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_planets_kundali FOREIGN KEY (kundali_id) REFERENCES kundalis(id) ON DELETE CASCADE,
+  KEY idx_planets_kundali (kundali_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

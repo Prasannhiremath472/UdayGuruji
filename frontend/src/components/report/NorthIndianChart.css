@@ -1,0 +1,29 @@
+.chart-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chart-title {
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.chart-svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+.chart-house-text {
+  font-size: 9px;
+  fill: var(--color-text);
+}
+
+.chart-house-number {
+  font-size: 8px;
+  fill: var(--color-text-muted);
+}

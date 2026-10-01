@@ -1,0 +1,51 @@
+.numerology-page .page-content-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.numerology-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.numerology-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.numerology-card .card-body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.numerology-number {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.numerology-label {
+  margin: 0 0 var(--space-1) 0;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.numerology-meaning {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}

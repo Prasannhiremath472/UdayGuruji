@@ -1,0 +1,67 @@
+.matching-result-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.match-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.match-names {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.match-heart {
+  color: var(--color-error);
+}
+
+.match-score-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(var(--color-primary) var(--score-percent), var(--color-border) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.match-score-circle::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+
+.match-score-value {
+  position: relative;
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.match-score-max {
+  position: relative;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.match-verdict {
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}

@@ -1,0 +1,27 @@
+.matching-form-page .page-content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.matching-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.person-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 900px) {
+  .matching-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  .matching-form > button {
+    grid-column: 1 / -1;
+  }
+}

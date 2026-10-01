@@ -1,0 +1,16 @@
+.kundali-report-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.report-toolbar {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.report-toolbar a.btn {
+  text-decoration: none;
+}

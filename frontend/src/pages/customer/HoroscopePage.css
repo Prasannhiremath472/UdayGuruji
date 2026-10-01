@@ -1,0 +1,85 @@
+.horoscope-page .page-content-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.rashi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.rashi-chip {
+  min-height: var(--touch-target);
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.rashi-chip-active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.period-toggle {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+
+.period-btn {
+  min-height: var(--touch-target);
+  padding: 0 var(--space-4);
+  background: var(--color-surface);
+  border: none;
+  border-right: 1px solid var(--color-border);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.period-btn:last-child {
+  border-right: none;
+}
+
+.period-btn-active {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.horoscope-categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.horoscope-category-title {
+  margin: 0 0 var(--space-1) 0;
+  color: var(--color-primary);
+  font-size: var(--font-size-base);
+}
+
+.horoscope-category p {
+  margin: 0;
+  color: var(--color-text);
+}
+
+@media (min-width: 480px) {
+  .rashi-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .rashi-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}

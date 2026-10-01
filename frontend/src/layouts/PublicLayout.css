@@ -1,0 +1,176 @@
+.public-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.public-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.public-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.public-brand span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.public-brand-logo {
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.public-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.public-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.public-nav-desktop {
+  display: none;
+}
+
+.public-nav-link {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+.public-nav-link:hover {
+  background: var(--color-bg);
+}
+.public-nav-link-active {
+  color: var(--color-primary);
+  background: var(--color-bg);
+}
+
+.public-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+.public-hamburger:hover {
+  border-color: var(--color-primary);
+}
+.public-hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+.public-nav-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.public-main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+/* All public pages render full-bleed (no padding/max-width here) so each
+   page can run its own full-width PageHeader banner. Below the banner,
+   each page's own root class supplies "padding: 0 var(--space-4)" and a
+   max-width to constrain and pad its actual content - see
+   components/common/PageHeader.css's .page-content-inner for the shared
+   pattern most pages use. */
+.public-main-full-bleed {
+  max-width: none;
+  padding: 0;
+}
+
+.public-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.public-footer-links a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+.public-footer-links a:hover {
+  color: var(--color-primary);
+}
+
+.public-footer {
+  text-align: center;
+  padding: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 900px) {
+  .public-header {
+    padding: var(--space-4) var(--space-8);
+  }
+  .public-nav-desktop {
+    display: flex;
+  }
+  .public-hamburger {
+    display: none;
+  }
+  .public-nav-mobile {
+    display: none;
+  }
+  .public-main {
+    padding: var(--space-8);
+  }
+}

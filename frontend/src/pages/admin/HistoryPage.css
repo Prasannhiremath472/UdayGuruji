@@ -1,0 +1,25 @@
+.history-filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.history-results {
+  margin-top: var(--space-5);
+}
+
+.history-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+  .history-filters {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .history-actions {
+    justify-content: flex-start;
+  }
+}

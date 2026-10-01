@@ -1,0 +1,104 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-bg);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--color-bg);
+}
+
+.btn-danger {
+  background: var(--color-error);
+  color: #fff;
+}
+.btn-danger:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-gold {
+  background: var(--color-secondary);
+  color: var(--color-ink);
+}
+.btn-gold:hover:not(:disabled) {
+  background: var(--color-secondary-light);
+}
+.btn-gold .btn-spinner {
+  border: 2px solid rgba(28, 16, 36, 0.25);
+  border-top-color: var(--color-ink);
+}
+
+.btn-outline-on-ink {
+  background: transparent;
+  color: var(--color-on-ink);
+  border-color: rgba(245, 239, 224, 0.4);
+}
+.btn-outline-on-ink:hover:not(:disabled) {
+  background: rgba(245, 239, 224, 0.1);
+  border-color: var(--color-on-ink);
+}
+.btn-outline-on-ink .btn-spinner {
+  border: 2px solid rgba(245, 239, 224, 0.3);
+  border-top-color: var(--color-on-ink);
+}
+
+.btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: btn-spin 0.7s linear infinite;
+}
+
+.btn-secondary .btn-spinner,
+.btn-ghost .btn-spinner {
+  border: 2px solid rgba(122, 46, 46, 0.25);
+  border-top-color: var(--color-primary);
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
