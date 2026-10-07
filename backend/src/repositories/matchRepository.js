@@ -8,8 +8,8 @@ async function create(data) {
       (access_token, groom_name, groom_date_of_birth, groom_time_of_birth, groom_place_of_birth,
        groom_moon_sign, groom_nakshatra, bride_name, bride_date_of_birth, bride_time_of_birth,
        bride_place_of_birth, bride_moon_sign, bride_nakshatra, total_score, max_score, verdict,
-       koota_breakdown, created_by)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       koota_breakdown, created_by, customer_id)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       accessToken,
       data.groom.name, data.groom.dateOfBirth, data.groom.timeOfBirth, data.groom.placeOfBirth,
@@ -19,6 +19,7 @@ async function create(data) {
       data.totalScore, data.maxScore, data.verdict,
       JSON.stringify(data.kootas),
       data.createdBy || null,
+      data.customerId || null,
     ]
   );
   return { id: result.insertId, accessToken };
@@ -36,4 +37,13 @@ async function findById(id) {
   return { ...publicFields, koota_breakdown: JSON.parse(publicFields.koota_breakdown) };
 }
 
-module.exports = { create, findById, fetchAccessTokenById };
+async function findByCustomerId(customerId) {
+  const [rows] = await pool.query(
+    `SELECT id, groom_name, bride_name, total_score, max_score, verdict, created_at
+     FROM kundali_matches WHERE customer_id = ? ORDER BY created_at DESC`,
+    [customerId]
+  );
+  return rows;
+}
+
+module.exports = { create, findById, fetchAccessTokenById, findByCustomerId };

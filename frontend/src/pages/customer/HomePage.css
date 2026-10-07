@@ -6,7 +6,11 @@
 /* ---------- Hero ---------- */
 
 .home-hero {
-  background: radial-gradient(ellipse 120% 100% at 30% 0%, var(--color-ink-light) 0%, var(--color-ink) 55%);
+  background-image: linear-gradient(180deg, rgba(28, 16, 36, 0.88) 0%, rgba(28, 16, 36, 0.94) 55%, var(--color-ink) 100%),
+    url('/images/stars-milkyway.jpg');
+  background-size: cover;
+  background-position: center 70%;
+  background-repeat: no-repeat;
   color: var(--color-on-ink);
   padding: var(--space-12) var(--space-4) var(--space-16);
   position: relative;
@@ -96,9 +100,27 @@
 }
 
 .home-features {
+  position: relative;
   padding: var(--space-16) var(--space-4) var(--space-12);
   max-width: var(--content-max-width);
   margin: 0 auto;
+}
+
+.home-features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 280px;
+  background-image: linear-gradient(135deg, rgba(250, 248, 245, 0.97) 0%, rgba(250, 248, 245, 0.75) 100%),
+    url('/images/miracosic-astrology-993127.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-xl);
+  opacity: 0.5;
+  z-index: 0;
+  display: none;
 }
 
 .home-section-title {
@@ -119,6 +141,8 @@
 }
 
 .home-features-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-5);
@@ -180,7 +204,11 @@
 /* ---------- CTA band ---------- */
 
 .home-cta-band {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  background-image: linear-gradient(135deg, rgba(80, 29, 29, 0.92) 0%, rgba(122, 46, 46, 0.92) 100%),
+    url('/images/diya-temple.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: var(--space-16) var(--space-4);
 }
 
@@ -213,6 +241,9 @@
 }
 
 @media (min-width: 900px) {
+  .home-features::before {
+    display: block;
+  }
   .home-hero {
     padding: var(--space-20) var(--space-8) var(--space-24);
   }

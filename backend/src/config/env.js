@@ -29,6 +29,11 @@ const env = {
     expiresIn: required('JWT_EXPIRES_IN', '8h'),
   },
 
+  customerJwt: {
+    secret: required('CUSTOMER_JWT_SECRET', ''),
+    expiresIn: required('CUSTOMER_JWT_EXPIRES_IN', '30d'),
+  },
+
   astrology: {
     provider: required('ASTROLOGY_PROVIDER', 'free_astrology_api'),
     apiKey: required('FREE_ASTROLOGY_API_KEY', ''),
@@ -76,6 +81,7 @@ const env = {
 if (env.nodeEnv === 'production') {
   const missing = [];
   if (!env.jwt.secret) missing.push('JWT_SECRET');
+  if (!env.customerJwt.secret) missing.push('CUSTOMER_JWT_SECRET');
   if (!env.db.password) missing.push('DB_PASSWORD');
   if (missing.length) {
     throw new Error(`Missing required production environment variables: ${missing.join(', ')}`);

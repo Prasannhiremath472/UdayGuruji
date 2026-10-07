@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import CustomerProtectedRoute from './components/common/CustomerProtectedRoute';
 
 import HomePage from './pages/customer/HomePage';
 import AboutPage from './pages/customer/AboutPage';
@@ -16,6 +17,9 @@ import MuhuratPage from './pages/customer/MuhuratPage';
 import NumerologyPage from './pages/customer/NumerologyPage';
 import MatchingFormPage from './pages/customer/MatchingFormPage';
 import MatchingResultPage from './pages/customer/MatchingResultPage';
+import AccountSignupPage from './pages/customer/account/SignupPage';
+import AccountLoginPage from './pages/customer/account/LoginPage';
+import AccountDashboardPage from './pages/customer/account/DashboardPage';
 
 import LoginPage from './pages/admin/LoginPage';
 import DashboardPage from './pages/admin/DashboardPage';
@@ -45,6 +49,11 @@ export default function App() {
         <Route path="/numerology" element={<NumerologyPage />} />
         <Route path="/matching" element={<MatchingFormPage />} />
         <Route path="/matching/:id" element={<MatchingResultPage />} />
+        <Route path="/account/signup" element={<AccountSignupPage />} />
+        <Route path="/account/login" element={<AccountLoginPage />} />
+        <Route element={<CustomerProtectedRoute />}>
+          <Route path="/account" element={<AccountDashboardPage />} />
+        </Route>
       </Route>
 
       {/* Chrome-less print/PDF route: intentionally outside PublicLayout so

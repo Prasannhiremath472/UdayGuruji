@@ -11,3 +11,8 @@ export async function getMatchById(id, accessToken) {
   });
   return res.data.data;
 }
+
+export async function getMyMatches() {
+  const res = await apiClient.get('/matching/mine');
+  return res.data.data;
+}

@@ -7,8 +7,14 @@ const { success } = require('../utils/apiResponse');
 
 const create = asyncHandler(async (req, res) => {
   const createdBy = req.user ? req.user.id : null;
-  const kundali = await kundaliService.generateAndSaveKundali(req.body, createdBy);
+  const customerId = req.customer ? req.customer.id : null;
+  const kundali = await kundaliService.generateAndSaveKundali(req.body, createdBy, customerId);
   return success(res, { statusCode: 201, message: 'Kundali generated successfully', data: kundali });
+});
+
+const getMine = asyncHandler(async (req, res) => {
+  const kundalis = await kundaliService.getMyKundalis(req.customer.id);
+  return success(res, { message: 'Your kundalis retrieved successfully', data: kundalis });
 });
 
 const getById = asyncHandler(async (req, res) => {
@@ -74,4 +80,4 @@ const getTransits = asyncHandler(async (req, res) => {
   return success(res, { message: 'Transits retrieved successfully', data: transits });
 });
 
-module.exports = { create, getById, search, remove, downloadPdf, getTransits };
+module.exports = { create, getById, search, remove, downloadPdf, getTransits, getMine };

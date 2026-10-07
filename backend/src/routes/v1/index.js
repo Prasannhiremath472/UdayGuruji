@@ -8,11 +8,13 @@ const numerologyRoutes = require('./numerology.routes');
 const horoscopeRoutes = require('./horoscope.routes');
 const matchingRoutes = require('./matching.routes');
 const consultationRoutes = require('./consultation.routes');
+const customerAuthRoutes = require('./customerAuth.routes');
 
 const router = express.Router();
 
 router.use('/kundalis', kundaliRoutes);
 router.use('/auth', authRoutes);
+router.use('/account', customerAuthRoutes);
 router.use('/brand', brandRoutes);
 router.use('/panchang', panchangRoutes);
 router.use('/muhurat', muhuratRoutes);

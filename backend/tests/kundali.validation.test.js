@@ -83,6 +83,7 @@ describe('POST /api/v1/kundalis validation', () => {
     expect(res.body.success).toBe(true);
     expect(kundaliService.generateAndSaveKundali).toHaveBeenCalledWith(
       expect.objectContaining({ fullName: 'Test User' }),
+      null,
       null
     );
   });

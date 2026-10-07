@@ -5,6 +5,7 @@ import './i18n';
 import './styles/tokens.css';
 import App from './App.jsx';
 import { AuthProvider } from './context/AuthContext';
+import { CustomerAuthProvider } from './context/CustomerAuthContext';
 import { BrandProvider } from './context/BrandContext';
 import { ToastProvider } from './components/common/Toast';
 
@@ -13,9 +14,11 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ToastProvider>
         <AuthProvider>
-          <BrandProvider>
-            <App />
-          </BrandProvider>
+          <CustomerAuthProvider>
+            <BrandProvider>
+              <App />
+            </BrandProvider>
+          </CustomerAuthProvider>
         </AuthProvider>
       </ToastProvider>
     </BrowserRouter>

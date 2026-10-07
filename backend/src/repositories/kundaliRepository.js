@@ -7,8 +7,8 @@ async function createKundali(connection, data) {
     `INSERT INTO kundalis
       (access_token, full_name, gender, date_of_birth, time_of_birth, place_of_birth, latitude, longitude,
        timezone, utc_offset_minutes, ayanamsa, language_preference, lagna, rashi, nakshatra,
-       nakshatra_pada, personality_summary, status, raw_response, created_by)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       nakshatra_pada, personality_summary, status, raw_response, created_by, customer_id)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       accessToken,
       data.fullName,
@@ -30,6 +30,7 @@ async function createKundali(connection, data) {
       data.status || 'completed',
       JSON.stringify(data.rawResponse || {}),
       data.createdBy || null,
+      data.customerId || null,
     ]
   );
   return { id: result.insertId, accessToken };
@@ -201,10 +202,20 @@ async function deleteById(id) {
   return result.affectedRows > 0;
 }
 
+async function findByCustomerId(customerId) {
+  const [rows] = await pool.query(
+    `SELECT id, full_name, gender, date_of_birth, time_of_birth, place_of_birth, lagna, rashi, nakshatra, status, created_at
+     FROM kundalis WHERE customer_id = ? ORDER BY created_at DESC`,
+    [customerId]
+  );
+  return rows;
+}
+
 module.exports = {
   saveFullKundali,
   findById,
   fetchAccessTokenById,
   search,
   deleteById,
+  findByCustomerId,
 };

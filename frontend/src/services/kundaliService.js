@@ -23,6 +23,11 @@ export async function deleteKundali(id) {
   await apiClient.delete(`/kundalis/${id}`);
 }
 
+export async function getMyKundalis() {
+  const res = await apiClient.get('/kundalis/mine');
+  return res.data.data;
+}
+
 export async function getTransits(id, accessToken) {
   const res = await apiClient.get(`/kundalis/${id}/transits`, {
     params: accessToken ? { accessToken } : undefined,

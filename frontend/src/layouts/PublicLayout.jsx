@@ -3,11 +3,13 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/common/LanguageSwitcher';
 import { useBrand } from '../context/BrandContext';
+import { useCustomerAuth } from '../context/CustomerAuthContext';
 import './PublicLayout.css';
 
 export default function PublicLayout() {
   const { t } = useTranslation();
   const { brand } = useBrand();
+  const { isAuthenticated } = useCustomerAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const navItems = [
@@ -16,6 +18,7 @@ export default function PublicLayout() {
     { to: '/services', label: t('nav.services') },
     { to: '/kundali', label: t('nav.kundali') },
     { to: '/contact', label: t('nav.contact') },
+    { to: isAuthenticated ? '/account' : '/account/login', label: isAuthenticated ? t('nav.account') : t('nav.accountLogin') },
   ];
 
   return (

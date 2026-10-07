@@ -48,7 +48,7 @@ async function computeAstrologyResult({ dateOfBirth, timeOfBirth, placeOfBirth }
  * Full kundali generation pipeline: geocode -> timezone -> astrology
  * provider -> persist. Throws ApiError on any stage failure.
  */
-async function generateAndSaveKundali(input, createdBy = null) {
+async function generateAndSaveKundali(input, createdBy = null, customerId = null) {
   const { location, result } = await computeAstrologyResult(input);
 
   // Yogas, Doshas, and Ashtakavarga are computed locally from the
@@ -107,6 +107,7 @@ async function generateAndSaveKundali(input, createdBy = null) {
     status: 'completed',
     rawResponse: result.raw,
     createdBy,
+    customerId,
     planets: result.planets,
     divisionalCharts: result.divisionalCharts,
     vimshottariDasha: result.vimshottariDasha,
@@ -175,6 +176,10 @@ async function getTransitsForKundali(id, { accessToken, isAuthenticated = false 
   return { kundaliId: kundali.id, lagna: kundali.lagna, generatedAt: now.toISOString(), transits, narrative };
 }
 
+async function getMyKundalis(customerId) {
+  return kundaliRepository.findByCustomerId(customerId);
+}
+
 module.exports = {
   generateAndSaveKundali,
   getKundaliById,
@@ -182,4 +187,5 @@ module.exports = {
   deleteKundali,
   computeAstrologyResult,
   getTransitsForKundali,
+  getMyKundalis,
 };

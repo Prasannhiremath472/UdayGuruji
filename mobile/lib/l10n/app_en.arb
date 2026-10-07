@@ -1,0 +1,12 @@
+{
+  "@@locale": "en",
+  "appTitle": "UdayGuruji Kundali",
+  "@appTitle": {
+    "description": "The application title, shown on the home screen and app switcher"
+  },
+  "navHome": "Home",
+  "navKundali": "Kundali",
+  "navHoroscope": "Horoscope",
+  "navMatching": "Matching",
+  "navAccount": "Account"
+}

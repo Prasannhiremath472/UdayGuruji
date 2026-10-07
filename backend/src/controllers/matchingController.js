@@ -4,8 +4,14 @@ const { success } = require('../utils/apiResponse');
 
 const create = asyncHandler(async (req, res) => {
   const createdBy = req.user ? req.user.id : null;
-  const match = await matchingService.generateMatch(req.body, createdBy);
+  const customerId = req.customer ? req.customer.id : null;
+  const match = await matchingService.generateMatch(req.body, createdBy, customerId);
   return success(res, { statusCode: 201, message: 'Kundali match generated successfully', data: match });
+});
+
+const getMine = asyncHandler(async (req, res) => {
+  const matches = await matchingService.getMyMatches(req.customer.id);
+  return success(res, { message: 'Your matches retrieved successfully', data: matches });
 });
 
 const getById = asyncHandler(async (req, res) => {
@@ -16,4 +22,4 @@ const getById = asyncHandler(async (req, res) => {
   return success(res, { message: 'Match retrieved successfully', data: match });
 });
 
-module.exports = { create, getById };
+module.exports = { create, getById, getMine };

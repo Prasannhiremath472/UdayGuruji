@@ -3,7 +3,7 @@ const { calculateGunaMilan } = require('./gunaMilanService');
 const matchRepository = require('../repositories/matchRepository');
 const { ApiError } = require('../utils/apiResponse');
 
-async function generateMatch({ groom, bride }, createdBy = null) {
+async function generateMatch({ groom, bride }, createdBy = null, customerId = null) {
   const [groomAstrology, brideAstrology] = await Promise.all([
     kundaliService.computeAstrologyResult(groom),
     kundaliService.computeAstrologyResult(bride),
@@ -22,6 +22,7 @@ async function generateMatch({ groom, bride }, createdBy = null) {
     verdict: gunaMilan.verdict,
     kootas: gunaMilan.kootas,
     createdBy,
+    customerId,
   });
 
   const match = await matchRepository.findById(id);
@@ -43,4 +44,8 @@ async function getMatchById(id, { accessToken, isAuthenticated = false } = {}) {
   return match;
 }
 
-module.exports = { generateMatch, getMatchById };
+async function getMyMatches(customerId) {
+  return matchRepository.findByCustomerId(customerId);
+}
+
+module.exports = { generateMatch, getMatchById, getMyMatches };
