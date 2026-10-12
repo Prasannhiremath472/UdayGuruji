@@ -34,7 +34,11 @@ async function findById(id) {
   const [[row]] = await pool.query('SELECT * FROM kundali_matches WHERE id = ?', [id]);
   if (!row) return null;
   const { access_token, ...publicFields } = row;
-  return { ...publicFields, koota_breakdown: JSON.parse(publicFields.koota_breakdown) };
+  // mysql2 auto-parses native JSON columns into JS objects/arrays, so
+  // koota_breakdown already comes back as real data here, not a string -
+  // no JSON.parse() needed (it would fail, coercing the object to the
+  // literal string "[object Object]" first).
+  return publicFields;
 }
 
 async function findByCustomerId(customerId) {

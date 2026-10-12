@@ -237,7 +237,10 @@ class _InfoRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 140,
-            child: Text(label, style: const TextStyle(color: Colors.grey)),
+            child: Text(
+              label,
+              style: TextStyle(color: context.appColors.textMuted),
+            ),
           ),
           Expanded(
             child: Text(

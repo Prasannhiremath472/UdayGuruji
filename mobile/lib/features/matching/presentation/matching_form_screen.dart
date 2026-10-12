@@ -85,9 +85,9 @@ class _MatchingFormScreenState extends ConsumerState<MatchingFormScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                Text(
                   'Enter both birth details for classical Guna Milan compatibility scoring.',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: context.appColors.textMuted),
                 ),
                 const SizedBox(height: AppSpacing.xl),
                 BirthDetailsForm(
@@ -107,18 +107,21 @@ class _MatchingFormScreenState extends ConsumerState<MatchingFormScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: AppSpacing.md),
-                  Text(_error!, style: const TextStyle(color: Colors.red)),
+                  Text(
+                    _error!,
+                    style: TextStyle(color: context.appColors.error),
+                  ),
                 ],
                 const SizedBox(height: AppSpacing.xl),
                 ElevatedButton(
                   onPressed: _submitting ? null : _submit,
                   child: _submitting
-                      ? const SizedBox(
+                      ? SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         )
                       : const Text('Check Compatibility'),

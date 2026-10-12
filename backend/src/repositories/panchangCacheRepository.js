@@ -11,7 +11,11 @@ async function find(date, latitude, longitude) {
     'SELECT panchang_json FROM panchang_cache WHERE cache_date = ? AND latitude = ? AND longitude = ?',
     [date, roundCoord(latitude), roundCoord(longitude)]
   );
-  return row ? JSON.parse(row.panchang_json) : null;
+  // mysql2 auto-parses native JSON columns into JS objects, so
+  // panchang_json already comes back as an object here, not a string -
+  // JSON.parse()'ing it would coerce it to "[object Object]" first and
+  // then fail. No parsing needed, just return it as-is.
+  return row ? row.panchang_json : null;
 }
 
 async function save(date, latitude, longitude, panchangData) {

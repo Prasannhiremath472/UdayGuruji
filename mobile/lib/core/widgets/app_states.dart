@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
-import '../theme/app_colors.dart';
 
 /// A full-bleed loading indicator with an optional message, used while an
 /// async request is in flight. Mirrors the web app's LoadingState.jsx.
@@ -11,19 +10,19 @@ class AppLoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.xxl),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const CircularProgressIndicator(color: AppColors.primary),
+            CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
             if (message != null) ...[
               const SizedBox(height: AppSpacing.lg),
-              Text(
-                message!,
-                style: const TextStyle(color: AppColors.textMuted),
-              ),
+              Text(message!, style: TextStyle(color: colors.textMuted)),
             ],
           ],
         ),
@@ -48,6 +47,7 @@ class AppEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.xxl),
@@ -64,7 +64,7 @@ class AppEmptyState extends StatelessWidget {
               Text(
                 description!,
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: AppColors.textMuted),
+                style: TextStyle(color: colors.textMuted),
               ),
             ],
             if (action != null) ...[
@@ -88,18 +88,19 @@ class AppErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.xxl),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.error_outline, color: AppColors.error, size: 40),
+            Icon(Icons.error_outline, color: colors.error, size: 40),
             const SizedBox(height: AppSpacing.md),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: AppColors.textPrimary),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
             if (onRetry != null) ...[
               const SizedBox(height: AppSpacing.lg),

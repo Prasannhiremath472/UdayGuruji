@@ -21,135 +21,259 @@ class AppRadius {
   static const md = 8.0;
   static const lg = 12.0;
   static const xl = 20.0;
+  static const pill = 999.0;
 }
 
 class AppTheme {
   AppTheme._();
 
-  static ThemeData get light {
+  static ThemeData _build({
+    required Brightness brightness,
+    required Color primary,
+    required Color secondary,
+    required Color background,
+    required Color surface,
+    required Color surfaceAlt,
+    required Color textPrimary,
+    required Color textMuted,
+    required Color borderColor,
+    required Color accent,
+    required Color accentHover,
+    required Color accentText,
+    required Color error,
+    required Color success,
+  }) {
     final displayFont = GoogleFonts.lora();
-    final bodyFont = GoogleFonts.notoSansTextTheme();
+    final bodyFont = GoogleFonts.notoSansTextTheme(
+      brightness == Brightness.dark
+          ? ThemeData.dark().textTheme
+          : ThemeData.light().textTheme,
+    );
 
-    final colorScheme = const ColorScheme.light(
-      primary: AppColors.primary,
-      onPrimary: Colors.white,
-      secondary: AppColors.secondary,
-      onSecondary: AppColors.textPrimary,
-      surface: AppColors.surface,
-      onSurface: AppColors.textPrimary,
-      error: AppColors.error,
+    final colorScheme = ColorScheme(
+      brightness: brightness,
+      primary: primary,
+      onPrimary: accentText,
+      secondary: secondary,
+      onSecondary: Colors.white,
+      surface: surface,
+      onSurface: textPrimary,
+      error: error,
       onError: Colors.white,
     );
 
     return ThemeData(
       useMaterial3: true,
+      brightness: brightness,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: background,
       textTheme: bodyFont.copyWith(
         displayLarge: displayFont.copyWith(
           fontSize: 32,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: textPrimary,
         ),
         displayMedium: displayFont.copyWith(
           fontSize: 26,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: textPrimary,
         ),
         displaySmall: displayFont.copyWith(
           fontSize: 22,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: textPrimary,
         ),
         titleLarge: displayFont.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: textPrimary,
         ),
-        bodyLarge: bodyFont.bodyLarge?.copyWith(color: AppColors.textPrimary),
-        bodyMedium: bodyFont.bodyMedium?.copyWith(color: AppColors.textPrimary),
-        bodySmall: bodyFont.bodySmall?.copyWith(color: AppColors.textMuted),
+        bodyLarge: bodyFont.bodyLarge?.copyWith(color: textPrimary),
+        bodyMedium: bodyFont.bodyMedium?.copyWith(color: textPrimary),
+        bodySmall: bodyFont.bodySmall?.copyWith(color: textMuted),
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.surface,
-        foregroundColor: AppColors.textPrimary,
+        backgroundColor: surface,
+        foregroundColor: textPrimary,
         elevation: 0,
         centerTitle: false,
         titleTextStyle: displayFont.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: AppColors.textPrimary,
+          color: textPrimary,
         ),
       ),
       cardTheme: CardThemeData(
-        color: AppColors.surface,
+        color: surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.lg),
-          side: const BorderSide(color: AppColors.borderColor),
+          side: BorderSide(color: borderColor),
         ),
         margin: EdgeInsets.zero,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
-          minimumSize: const Size.fromHeight(48),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-        ),
+        style:
+            ElevatedButton.styleFrom(
+              backgroundColor: accent,
+              foregroundColor: accentText,
+              minimumSize: const Size.fromHeight(44),
+              shape: const StadiumBorder(),
+              textStyle: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
+            ).copyWith(
+              overlayColor: WidgetStateProperty.resolveWith(
+                (states) => states.contains(WidgetState.pressed)
+                    ? accentHover.withValues(alpha: 0.2)
+                    : null,
+              ),
+            ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.primary,
-          side: const BorderSide(color: AppColors.primary),
-          minimumSize: const Size.fromHeight(48),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
+          foregroundColor: secondary,
+          side: BorderSide(color: secondary),
+          minimumSize: const Size.fromHeight(44),
+          shape: const StadiumBorder(),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+        style: TextButton.styleFrom(foregroundColor: secondary),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
+        fillColor: surface,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
-          borderSide: const BorderSide(color: AppColors.borderColor),
+          borderSide: BorderSide(color: borderColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
-          borderSide: const BorderSide(color: AppColors.borderColor),
+          borderSide: BorderSide(color: borderColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
-          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+          borderSide: BorderSide(color: accent, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
-          borderSide: const BorderSide(color: AppColors.error),
+          borderSide: BorderSide(color: error),
         ),
-        labelStyle: const TextStyle(color: AppColors.textMuted),
+        labelStyle: TextStyle(color: textMuted),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.surface,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.textMuted,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: surface,
+        selectedItemColor: secondary,
+        unselectedItemColor: textMuted,
         type: BottomNavigationBarType.fixed,
         elevation: 8,
       ),
-      dividerTheme: const DividerThemeData(
-        color: AppColors.borderColor,
-        thickness: 1,
-      ),
+      dividerTheme: DividerThemeData(color: borderColor, thickness: 1),
+      extensions: [
+        AppSemanticColors(
+          surfaceAlt: surfaceAlt,
+          borderColor: borderColor,
+          textMuted: textMuted,
+          error: error,
+          success: success,
+        ),
+      ],
     );
   }
+
+  static ThemeData get light => _build(
+    brightness: Brightness.light,
+    primary: AppColorsLight.primary,
+    secondary: AppColorsLight.secondary,
+    background: AppColorsLight.background,
+    surface: AppColorsLight.surface,
+    surfaceAlt: AppColorsLight.surfaceAlt,
+    textPrimary: AppColorsLight.textPrimary,
+    textMuted: AppColorsLight.textMuted,
+    borderColor: AppColorsLight.borderColor,
+    accent: AppColorsLight.accent,
+    accentHover: AppColorsLight.accentHover,
+    accentText: AppColorsLight.accentText,
+    error: AppColorsLight.error,
+    success: AppColorsLight.success,
+  );
+
+  static ThemeData get dark => _build(
+    brightness: Brightness.dark,
+    primary: AppColorsDark.primary,
+    secondary: AppColorsDark.secondary,
+    background: AppColorsDark.background,
+    surface: AppColorsDark.surface,
+    surfaceAlt: AppColorsDark.surfaceAlt,
+    textPrimary: AppColorsDark.textPrimary,
+    textMuted: AppColorsDark.textMuted,
+    borderColor: AppColorsDark.borderColor,
+    accent: AppColorsDark.accent,
+    accentHover: AppColorsDark.accentHover,
+    accentText: AppColorsDark.accentText,
+    error: AppColorsDark.error,
+    success: AppColorsDark.success,
+  );
+}
+
+/// Theme-aware tokens not covered by Flutter's built-in ColorScheme
+/// (surfaceAlt/borderColor/textMuted/error as used by this app's custom
+/// widgets), exposed as a ThemeExtension so screens can do
+/// `Theme.of(context).extension<AppSemanticColors>()!.textMuted` instead
+/// of importing AppColorsLight/AppColorsDark directly and hardcoding which
+/// one applies.
+class AppSemanticColors extends ThemeExtension<AppSemanticColors> {
+  const AppSemanticColors({
+    required this.surfaceAlt,
+    required this.borderColor,
+    required this.textMuted,
+    required this.error,
+    required this.success,
+  });
+
+  final Color surfaceAlt;
+  final Color borderColor;
+  final Color textMuted;
+  final Color error;
+  final Color success;
+
+  @override
+  AppSemanticColors copyWith({
+    Color? surfaceAlt,
+    Color? borderColor,
+    Color? textMuted,
+    Color? error,
+    Color? success,
+  }) {
+    return AppSemanticColors(
+      surfaceAlt: surfaceAlt ?? this.surfaceAlt,
+      borderColor: borderColor ?? this.borderColor,
+      textMuted: textMuted ?? this.textMuted,
+      error: error ?? this.error,
+      success: success ?? this.success,
+    );
+  }
+
+  @override
+  AppSemanticColors lerp(ThemeExtension<AppSemanticColors>? other, double t) {
+    if (other is! AppSemanticColors) return this;
+    return AppSemanticColors(
+      surfaceAlt: Color.lerp(surfaceAlt, other.surfaceAlt, t)!,
+      borderColor: Color.lerp(borderColor, other.borderColor, t)!,
+      textMuted: Color.lerp(textMuted, other.textMuted, t)!,
+      error: Color.lerp(error, other.error, t)!,
+      success: Color.lerp(success, other.success, t)!,
+    );
+  }
+}
+
+extension AppThemeContext on BuildContext {
+  AppSemanticColors get appColors =>
+      Theme.of(this).extension<AppSemanticColors>()!;
 }

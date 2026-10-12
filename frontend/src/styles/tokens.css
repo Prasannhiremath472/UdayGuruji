@@ -110,6 +110,11 @@
 html, body {
   margin: 0;
   padding: 0;
+  /* Safety net: no single element (the ticker's duplicated-width track,
+     a stray fixed-width box, etc.) should ever be able to force the whole
+     page to scroll sideways on narrow screens. */
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {

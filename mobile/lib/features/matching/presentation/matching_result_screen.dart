@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/network/api_exception.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/app_states.dart';
 import '../../../core/widgets/section_card.dart';
@@ -54,25 +53,27 @@ class _ResultBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
         Card(
-          color: AppColors.ink,
+          color: scheme.primary,
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.xxl),
             child: Column(
               children: [
                 Text(
                   '${match.groomName} & ${match.brideName}',
-                  style: const TextStyle(color: AppColors.onInk, fontSize: 16),
+                  style: TextStyle(color: scheme.onPrimary, fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppSpacing.md),
                 Text(
                   '${match.totalScore}/${match.maxScore}',
-                  style: const TextStyle(
-                    color: AppColors.secondary,
+                  style: TextStyle(
+                    color: scheme.onPrimary,
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                   ),
@@ -80,7 +81,9 @@ class _ResultBody extends StatelessWidget {
                 const SizedBox(height: AppSpacing.sm),
                 Text(
                   match.verdict,
-                  style: const TextStyle(color: AppColors.onInkMuted),
+                  style: TextStyle(
+                    color: scheme.onPrimary.withValues(alpha: 0.8),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 if (match.hasNadiDosha || match.hasBhakootDosha) ...[
@@ -143,9 +146,9 @@ class _ResultBody extends StatelessWidget {
                               ),
                               Text(
                                 k.description,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.grey,
+                                  color: context.appColors.textMuted,
                                 ),
                               ),
                             ],

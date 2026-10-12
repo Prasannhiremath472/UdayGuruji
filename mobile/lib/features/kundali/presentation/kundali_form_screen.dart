@@ -72,9 +72,9 @@ class _KundaliFormScreenState extends ConsumerState<KundaliFormScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
+                Text(
                   'Enter accurate birth details for a precise astrological report.',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: context.appColors.textMuted),
                 ),
                 const SizedBox(height: AppSpacing.xl),
                 BirthDetailsForm(key: _birthFormKey, data: _formData),
@@ -93,18 +93,21 @@ class _KundaliFormScreenState extends ConsumerState<KundaliFormScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: AppSpacing.md),
-                  Text(_error!, style: const TextStyle(color: Colors.red)),
+                  Text(
+                    _error!,
+                    style: TextStyle(color: context.appColors.error),
+                  ),
                 ],
                 const SizedBox(height: AppSpacing.xl),
                 ElevatedButton(
                   onPressed: _submitting ? null : _submit,
                   child: _submitting
-                      ? const SizedBox(
+                      ? SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         )
                       : const Text('Generate Kundali'),

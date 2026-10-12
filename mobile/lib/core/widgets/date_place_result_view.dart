@@ -21,9 +21,9 @@ class DynamicFieldsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final entries = fields.entries.where((e) => e.value != null).toList();
     if (entries.isEmpty) {
-      return const Text(
+      return Text(
         'No data available for this date and place.',
-        style: TextStyle(color: Colors.grey),
+        style: TextStyle(color: context.appColors.textMuted),
       );
     }
     return Column(

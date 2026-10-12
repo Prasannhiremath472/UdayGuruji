@@ -76,9 +76,9 @@ class _AskQuestionScreenState extends ConsumerState<AskQuestionScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
+                Icon(
                   Icons.check_circle_outline,
-                  color: Colors.green,
+                  color: context.appColors.success,
                   size: 48,
                 ),
                 const SizedBox(height: AppSpacing.lg),
@@ -87,10 +87,10 @@ class _AskQuestionScreenState extends ConsumerState<AskQuestionScreen> {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                const Text(
+                Text(
                   "An astrologer will review it and reply via the contact details you provided.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: context.appColors.textMuted),
                 ),
               ],
             ),
@@ -146,18 +146,21 @@ class _AskQuestionScreenState extends ConsumerState<AskQuestionScreen> {
                 ),
                 if (_error != null) ...[
                   const SizedBox(height: AppSpacing.md),
-                  Text(_error!, style: const TextStyle(color: Colors.red)),
+                  Text(
+                    _error!,
+                    style: TextStyle(color: context.appColors.error),
+                  ),
                 ],
                 const SizedBox(height: AppSpacing.xl),
                 ElevatedButton(
                   onPressed: _submitting ? null : _submit,
                   child: _submitting
-                      ? const SizedBox(
+                      ? SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         )
                       : const Text('Submit Question'),
