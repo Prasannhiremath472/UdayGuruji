@@ -23,9 +23,9 @@
 }
 
 .rashi-chip-active {
-  background: var(--color-primary);
-  color: #fff;
-  border-color: var(--color-primary);
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  border-color: var(--color-accent);
 }
 
 .period-toggle {

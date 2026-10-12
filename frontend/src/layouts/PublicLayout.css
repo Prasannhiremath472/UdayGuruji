@@ -79,6 +79,23 @@
   background: var(--color-bg);
 }
 
+.public-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.public-theme-toggle:hover {
+  border-color: var(--color-secondary);
+}
+
 .public-hamburger {
   display: flex;
   flex-direction: column;
@@ -131,30 +148,83 @@
   padding: 0;
 }
 
-.public-footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2) var(--space-4);
-  margin-bottom: var(--space-3);
+/* Footer stays dark in both themes (like most sites' footers), so it uses
+   fixed colors rather than the theme-swappable --color-ink/--color-on-ink
+   tokens, which now mean "page background/text" and differ per theme. */
+.public-footer {
+  background: #14100b;
+  color: #f3ede2;
+  border-top: 1px solid var(--color-border);
 }
 
-.public-footer-links a {
-  color: var(--color-text-muted);
+.public-footer-inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-4) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.public-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  color: #f3ede2;
+}
+
+.public-footer-logo {
+  height: 32px;
+  width: auto;
+}
+
+.public-footer-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.public-footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.public-footer-column h3 {
+  margin: 0 0 var(--space-1) 0;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a89d8d;
+}
+
+.public-footer-column a {
+  color: #f3ede2;
   text-decoration: none;
   font-size: var(--font-size-sm);
-  font-weight: 600;
 }
-.public-footer-links a:hover {
-  color: var(--color-primary);
+.public-footer-column a:hover {
+  color: var(--color-accent);
 }
 
-.public-footer {
-  text-align: center;
-  padding: var(--space-4);
-  color: var(--color-text-muted);
+.public-footer-note {
+  margin: 0;
+  color: #a89d8d;
   font-size: var(--font-size-sm);
-  border-top: 1px solid var(--color-border);
+}
+
+.public-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-4);
+  text-align: center;
+  color: #a89d8d;
+  font-size: var(--font-size-sm);
+}
+
+.public-footer-bottom p {
+  margin: 0;
 }
 
 @media (min-width: 900px) {
@@ -172,5 +242,8 @@
   }
   .public-main {
     padding: var(--space-8);
+  }
+  .public-footer-columns {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

@@ -40,6 +40,6 @@
 }
 
 .time-period-btn-active {
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
 }

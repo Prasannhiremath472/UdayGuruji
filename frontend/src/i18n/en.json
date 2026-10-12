@@ -5,9 +5,79 @@
     "heroSubtitle": "Generate a detailed Vedic Kundali, check your daily horoscope, find auspicious timings, and explore compatibility - all backed by classical Vedic astrology.",
     "generateKundaliCta": "Generate Free Kundali",
     "askQuestionCta": "Ask an Astrologer",
-    "featuresTitle": "Explore Our Astrology Tools",
+    "heroBullets": {
+      "freeKundli": "Get your free detailed Kundali",
+      "classicalMethods": "Classical Vedic methods, not simplified shortcuts"
+    },
+    "stats": {
+      "kundalisGenerated": "Kundalis Generated",
+      "languagesSupported": "Languages Supported",
+      "methodology": "Lahiri Ayanamsha, Classical Methods"
+    },
+    "ticker": {
+      "item1": "Accurate calculations using verified geocoding & timezone data",
+      "item2": "Your birth data is kept private and secure",
+      "item3": "Available in English, Hindi, and Marathi",
+      "item4": "Classical Parasara-based Vedic methods",
+      "item5": "Free to generate your core Kundali report"
+    },
+    "quickActions": {
+      "title": "Start Here",
+      "kundali": { "title": "Generate Kundali", "description": "Your complete Vedic birth chart" },
+      "matching": { "title": "Check Compatibility", "description": "Classical Guna Milan matching" },
+      "horoscope": { "title": "Daily Horoscope", "description": "Today's predictions for your sign" },
+      "askQuestion": { "title": "Ask a Question", "description": "Get a personal answer from an astrologer" }
+    },
+    "featuresTitle": "All Astrology Tools",
     "featuresSubtitle": "Everything you need for a complete astrological picture, in one place.",
     "exploreLink": "Explore",
+    "categories": {
+      "title": "Browse by Category",
+      "loveRelationships": { "title": "Love & Relationships", "description": "Kundali matching & compatibility" },
+      "careerMoney": { "title": "Career & Money", "description": "Numerology insights for career & finance" },
+      "familyHealth": { "title": "Family & Health", "description": "Kundali report & personality insights" },
+      "auspiciousTiming": { "title": "Auspicious Timing", "description": "Panchang & Muhurat for important events" }
+    },
+    "horoscopePreview": {
+      "title": "Today's Horoscope",
+      "subtitle": "Select your zodiac sign for a quick daily insight",
+      "selectPrompt": "Select your sign above to see today's horoscope",
+      "readFull": "Read Full Horoscope"
+    },
+    "servicesGrid": {
+      "title": "Our Services",
+      "items": {
+        "kundali": "Free Kundali",
+        "horoscope": "Daily Horoscope",
+        "numerology": "Numerology",
+        "matching": "Kundali Matching",
+        "panchang": "Panchang",
+        "muhurat": "Muhurat"
+      }
+    },
+    "appDownload": {
+      "eyebrow": "The UdayGuruji App",
+      "title": "Astrology made simpler, coming soon to your phone",
+      "subtitle": "A native mobile app is in development, bringing your Kundali, horoscope, matching, and more to iOS and Android.",
+      "feature1": "Generate and revisit your Kundali anytime",
+      "feature2": "Your data stays private and secure",
+      "comingSoonNote": "Coming soon to the App Store and Google Play."
+    },
+    "educational": {
+      "title": "Understand Astrology",
+      "blocks": {
+        "whatIsAstrology": {
+          "title": "Why Do You Need Astrology?",
+          "paragraph1": "Vedic astrology studies how the positions of planets and stars at the moment of your birth shape your personality, relationships, and life path. It is one of the oldest systematic traditions for understanding these patterns.",
+          "paragraph2": "This classical knowledge connects everyday questions to a larger framework. By studying your birth chart, you can better understand your strengths, challenges, and the timing of important life events."
+        },
+        "howConsultationsWork": {
+          "title": "How Does Kundali Generation Work?",
+          "paragraph1": "Enter your full name, date, time, and place of birth. We resolve your birth location to precise coordinates and timezone, then compute your chart using classical Vedic calculation methods with the Lahiri Ayanamsha.",
+          "paragraph2": "Your report includes planetary positions, divisional charts, Vimshottari Dasha periods, Yogas, Doshas, and Ashtakavarga - all generated from real astronomical data, not generic templates."
+        }
+      }
+    },
     "ctaBandTitle": "Ready to Explore Your Chart?",
     "ctaBandSubtitle": "Enter your birth details and get a complete, professional Vedic Kundali report in minutes.",
     "features": {
@@ -77,6 +147,8 @@
     "testimonials": {
       "title": "What People Say",
       "sampleNote": "Sample testimonials shown for illustration.",
+      "previous": "Previous testimonial",
+      "next": "Next testimonial",
       "items": {
         "sample1": {
           "quote": "The report was detailed and easy to understand, even for someone new to astrology.",
@@ -152,8 +224,15 @@
     "numerology": "Numerology",
     "askQuestion": "Ask a Question",
     "consultations": "Consultations",
+    "freeServices": "Free Services",
     "account": "My Account",
     "accountLogin": "Login"
+  },
+  "footer": {
+    "toolsHeading": "Astrology Tools",
+    "companyHeading": "Company",
+    "contactHeading": "Contact Us",
+    "contactNote": "Questions? Reach out and we'll get back to you."
   },
   "account": {
     "signupTitle": "Create Your Account",
@@ -241,7 +320,16 @@
     "interpretation": "Interpretation",
     "personalitySummary": "Personality & Life Themes",
     "aiDisclaimer": "This interpretation is AI-generated from your calculated chart data and is for general guidance only, not a substitute for a professional consultation.",
-    "currentDashaOutlook": "Current {{planet}} Mahadasha Outlook"
+    "currentDashaOutlook": "Current {{planet}} Mahadasha Outlook",
+    "tabs": {
+      "summary": "Summary",
+      "charts": "Charts",
+      "planets": "Planets",
+      "dasha": "Dasha",
+      "yogasDoshas": "Yogas & Doshas",
+      "ashtakavarga": "Ashtakavarga",
+      "transits": "Transits"
+    }
   },
   "admin": {
     "loginTitle": "Admin Login",

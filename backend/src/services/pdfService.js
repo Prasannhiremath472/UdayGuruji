@@ -26,12 +26,18 @@ async function renderReportPdf(reportUrl) {
     page = await browser.newPage();
     await page.goto(reportUrl, { waitUntil: 'networkidle0', timeout: 30000 });
     await page.emulateMediaType('print');
-    const pdfBuffer = await page.pdf({
+    const pdfData = await page.pdf({
       format: 'A4',
       printBackground: true,
       margin: { top: '10mm', bottom: '10mm', left: '10mm', right: '10mm' },
     });
-    return pdfBuffer;
+    // page.pdf() returns a Uint8Array, not a true Node Buffer - Express's
+    // res.send() only auto-detects real Buffers for binary responses, so
+    // passing the Uint8Array through as-is gets JSON-stringified instead
+    // of sent as raw bytes, producing a PDF file that downloads but won't
+    // open. Wrapping it here (no copy - Buffer.from shares the underlying
+    // memory for a Uint8Array) fixes that.
+    return Buffer.from(pdfData);
   } catch (err) {
     logger.error(`PDF generation failed for ${reportUrl}: ${err.message}`);
     throw new ApiError(500, 'Unable to generate PDF at this time', 'PDF_GENERATION_FAILED');

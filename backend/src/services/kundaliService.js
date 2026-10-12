@@ -180,6 +180,11 @@ async function getMyKundalis(customerId) {
   return kundaliRepository.findByCustomerId(customerId);
 }
 
+async function getPublicStats() {
+  const totalKundalis = await kundaliRepository.countAll();
+  return { totalKundalis };
+}
+
 module.exports = {
   generateAndSaveKundali,
   getKundaliById,
@@ -188,4 +193,5 @@ module.exports = {
   computeAstrologyResult,
   getTransitsForKundali,
   getMyKundalis,
+  getPublicStats,
 };

@@ -105,8 +105,8 @@
   background: var(--color-bg);
 }
 .admin-nav-link-active {
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .admin-overlay {

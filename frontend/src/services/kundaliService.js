@@ -28,6 +28,11 @@ export async function getMyKundalis() {
   return res.data.data;
 }
 
+export async function getPublicStats() {
+  const res = await apiClient.get('/kundalis/stats/public');
+  return res.data.data;
+}
+
 export async function getTransits(id, accessToken) {
   const res = await apiClient.get(`/kundalis/${id}/transits`, {
     params: accessToken ? { accessToken } : undefined,

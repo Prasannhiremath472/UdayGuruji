@@ -211,6 +211,11 @@ async function findByCustomerId(customerId) {
   return rows;
 }
 
+async function countAll() {
+  const [[{ total }]] = await pool.query('SELECT COUNT(*) AS total FROM kundalis');
+  return total;
+}
+
 module.exports = {
   saveFullKundali,
   findById,
@@ -218,4 +223,5 @@ module.exports = {
   search,
   deleteById,
   findByCustomerId,
+  countAll,
 };

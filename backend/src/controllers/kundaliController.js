@@ -17,6 +17,11 @@ const getMine = asyncHandler(async (req, res) => {
   return success(res, { message: 'Your kundalis retrieved successfully', data: kundalis });
 });
 
+const getPublicStats = asyncHandler(async (req, res) => {
+  const stats = await kundaliService.getPublicStats();
+  return success(res, { message: 'Stats retrieved successfully', data: stats });
+});
+
 const getById = asyncHandler(async (req, res) => {
   const kundali = await kundaliService.getKundaliById(req.params.id, {
     accessToken: req.query.accessToken,
@@ -80,4 +85,4 @@ const getTransits = asyncHandler(async (req, res) => {
   return success(res, { message: 'Transits retrieved successfully', data: transits });
 });
 
-module.exports = { create, getById, search, remove, downloadPdf, getTransits, getMine };
+module.exports = { create, getById, search, remove, downloadPdf, getTransits, getMine, getPublicStats };
