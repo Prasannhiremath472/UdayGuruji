@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
+
+/// Font family names, bundled as local assets (see pubspec.yaml) rather
+/// than fetched at runtime via google_fonts - that fetch hit
+/// fonts.gstatic.com and crashed the app on launch with no network route.
+class AppFonts {
+  AppFonts._();
+  static const display = 'Lora';
+  static const body = 'NotoSans';
+}
 
 /// Spacing scale, mirroring the --space-* tokens in tokens.css.
 class AppSpacing {
@@ -43,12 +51,11 @@ class AppTheme {
     required Color error,
     required Color success,
   }) {
-    final displayFont = GoogleFonts.lora();
-    final bodyFont = GoogleFonts.notoSansTextTheme(
-      brightness == Brightness.dark
-          ? ThemeData.dark().textTheme
-          : ThemeData.light().textTheme,
-    );
+    final baseTextTheme = (brightness == Brightness.dark
+            ? ThemeData.dark().textTheme
+            : ThemeData.light().textTheme)
+        .apply(fontFamily: AppFonts.body);
+    const displayStyle = TextStyle(fontFamily: AppFonts.display);
 
     final colorScheme = ColorScheme(
       brightness: brightness,
@@ -67,37 +74,37 @@ class AppTheme {
       brightness: brightness,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: background,
-      textTheme: bodyFont.copyWith(
-        displayLarge: displayFont.copyWith(
+      textTheme: baseTextTheme.copyWith(
+        displayLarge: displayStyle.copyWith(
           fontSize: 32,
           fontWeight: FontWeight.w600,
           color: textPrimary,
         ),
-        displayMedium: displayFont.copyWith(
+        displayMedium: displayStyle.copyWith(
           fontSize: 26,
           fontWeight: FontWeight.w600,
           color: textPrimary,
         ),
-        displaySmall: displayFont.copyWith(
+        displaySmall: displayStyle.copyWith(
           fontSize: 22,
           fontWeight: FontWeight.w600,
           color: textPrimary,
         ),
-        titleLarge: displayFont.copyWith(
+        titleLarge: displayStyle.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: textPrimary,
         ),
-        bodyLarge: bodyFont.bodyLarge?.copyWith(color: textPrimary),
-        bodyMedium: bodyFont.bodyMedium?.copyWith(color: textPrimary),
-        bodySmall: bodyFont.bodySmall?.copyWith(color: textMuted),
+        bodyLarge: baseTextTheme.bodyLarge?.copyWith(color: textPrimary),
+        bodyMedium: baseTextTheme.bodyMedium?.copyWith(color: textPrimary),
+        bodySmall: baseTextTheme.bodySmall?.copyWith(color: textMuted),
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: surface,
         foregroundColor: textPrimary,
         elevation: 0,
         centerTitle: false,
-        titleTextStyle: displayFont.copyWith(
+        titleTextStyle: displayStyle.copyWith(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: textPrimary,
