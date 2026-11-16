@@ -12,6 +12,7 @@ const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 const { success } = require('./utils/apiResponse');
 
 const app = express();
+app.set('trust proxy', 1);
 
 app.use(helmet());
 app.use(
