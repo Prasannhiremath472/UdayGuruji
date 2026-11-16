@@ -18,3 +18,8 @@ Thumbs.db
 
 *.log
 coverage/
+
+# Deployment env files containing real keys
+backend/.env.hostinger
+
+backend/hostinger-setup.sql
