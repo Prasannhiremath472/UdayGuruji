@@ -38,6 +38,14 @@ export default function KundaliPrintPage() {
     };
   }, [id, accessToken]);
 
+  const autoPrint = searchParams.get('autoprint') === '1';
+  useEffect(() => {
+    if (!autoPrint || !kundali) return undefined;
+    // Let the report paint before opening the print dialog.
+    const timer = setTimeout(() => window.print(), 800);
+    return () => clearTimeout(timer);
+  }, [autoPrint, kundali]);
+
   if (loading) return <LoadingState />;
   if (error || !kundali) return <ErrorState message={error} />;
 

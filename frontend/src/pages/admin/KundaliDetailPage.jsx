@@ -6,7 +6,7 @@ import TransitsSection from '../../components/report/TransitsSection';
 import LoadingState from '../../components/common/LoadingState';
 import ErrorState from '../../components/common/ErrorState';
 import Button from '../../components/common/Button';
-import { getKundaliById, downloadPdfAsAdmin } from '../../services/kundaliService';
+import { getKundaliById } from '../../services/kundaliService';
 import './KundaliDetailPage.css';
 
 export default function KundaliDetailPage() {
@@ -49,9 +49,7 @@ export default function KundaliDetailPage() {
           <Button variant="secondary" onClick={() => window.print()}>
             {t('report.printReport')}
           </Button>
-          <Button onClick={() => downloadPdfAsAdmin(kundali.id, `kundali-${kundali.full_name}.pdf`)}>
-            {t('report.downloadPdf')}
-          </Button>
+          <Button onClick={() => window.print()}>{t('report.downloadPdf')}</Button>
         </div>
       </div>
       <KundaliReport kundali={kundali} />

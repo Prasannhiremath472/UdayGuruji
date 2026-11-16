@@ -11,7 +11,7 @@ import EmptyState from '../../components/common/EmptyState';
 import Button from '../../components/common/Button';
 import { useToast } from '../../components/common/Toast';
 import useDebouncedValue from '../../hooks/useDebouncedValue';
-import { searchKundalis, deleteKundali, downloadPdfAsAdmin } from '../../services/kundaliService';
+import { searchKundalis, deleteKundali } from '../../services/kundaliService';
 import './HistoryPage.css';
 
 export default function HistoryPage() {
@@ -74,7 +74,7 @@ export default function HistoryPage() {
           <Button variant="ghost" onClick={() => navigate(`/admin/kundalis/${row.id}`)}>
             {t('admin.view')}
           </Button>
-          <Button variant="ghost" onClick={() => downloadPdfAsAdmin(row.id, `kundali-${row.full_name}.pdf`)}>
+          <Button variant="ghost" onClick={() => window.open(`/report/${row.id}/print?autoprint=1`, '_blank')}>
             {t('report.downloadPdf')}
           </Button>
           <Button variant="danger" onClick={() => handleDelete(row.id)}>

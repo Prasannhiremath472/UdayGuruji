@@ -14,7 +14,7 @@ import LoadingState from '../../components/common/LoadingState';
 import ErrorState from '../../components/common/ErrorState';
 import Button from '../../components/common/Button';
 import Tabs from '../../components/common/Tabs';
-import { getKundaliById, getPublicPdfUrl } from '../../services/kundaliService';
+import { getKundaliById } from '../../services/kundaliService';
 import './KundaliReportPage.css';
 
 export default function KundaliReportPage() {
@@ -102,14 +102,9 @@ export default function KundaliReportPage() {
         <Button variant="secondary" onClick={() => window.print()}>
           {t('report.printReport')}
         </Button>
-        <a
-          className="btn btn-primary"
-          href={getPublicPdfUrl(kundali.id, accessToken)}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {t('report.downloadPdf')}
-        </a>
+        {/* Server-side PDF is unavailable on this host; the print dialog's
+            "Save as PDF" produces the same report. */}
+        <Button onClick={() => window.print()}>{t('report.downloadPdf')}</Button>
       </div>
       <Tabs tabs={tabs} />
     </div>
