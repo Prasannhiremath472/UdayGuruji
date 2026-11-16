@@ -1,15 +1,26 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const chromium = require('@sparticuz/chromium');
 const logger = require('../utils/logger');
 const { ApiError } = require('../utils/apiResponse');
 
 let browserPromise = null;
 
+// Bundled Chromium: shared hosting has no system Chrome or its libraries.
 function getBrowser() {
   if (!browserPromise) {
-    browserPromise = puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    browserPromise = chromium
+      .executablePath()
+      .then((executablePath) =>
+        puppeteer.launch({
+          executablePath,
+          headless: 'shell',
+          args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+        })
+      )
+      .catch((err) => {
+        browserPromise = null;
+        throw err;
+      });
   }
   return browserPromise;
 }
