@@ -32,6 +32,32 @@ async function prepareChromium() {
   return executablePath;
 }
 
+// TEMPORARY: logs why Chromium dies on the host; remove once PDFs work.
+async function diagnoseChromium() {
+  try {
+    const { spawn } = require('child_process');
+    const exe = path.join(process.cwd(), '.cache', 'chromium', 'chromium');
+    const out = await new Promise((resolve) => {
+      let buf = '';
+      const child = spawn(exe, [...chromium.args, '--headless', '--remote-debugging-port=0', 'about:blank'], {
+        env: process.env,
+      });
+      child.stdout.on('data', (d) => (buf += d));
+      child.stderr.on('data', (d) => (buf += d));
+      child.on('error', (e) => resolve(`spawn error: ${e.message}`));
+      child.on('exit', (code, sig) => resolve(`exit code=${code} signal=${sig}\n${buf}`));
+      setTimeout(() => {
+        child.kill('SIGKILL');
+        resolve(`still running after 6s\n${buf}`);
+      }, 6000);
+    });
+    logger.error(`CHROMIUM DIAG: ${out.slice(-1800)}`);
+    logger.error(`CHROMIUM DIAG env: LD_LIBRARY_PATH=${process.env.LD_LIBRARY_PATH} mem=${require('os').freemem()}/${require('os').totalmem()}`);
+  } catch (e) {
+    logger.error(`CHROMIUM DIAG failed: ${e.message}`);
+  }
+}
+
 function getBrowser() {
   if (!browserPromise) {
     browserPromise = prepareChromium()
@@ -42,8 +68,9 @@ function getBrowser() {
           args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
         })
       )
-      .catch((err) => {
+      .catch(async (err) => {
         browserPromise = null;
+        await diagnoseChromium();
         throw err;
       });
   }
