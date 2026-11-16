@@ -46,10 +46,9 @@ export default function KundaliDetailPage() {
           &larr; {t('common.back')}
         </Button>
         <div className="detail-toolbar-actions">
-          <Button variant="secondary" onClick={() => window.print()}>
-            {t('report.printReport')}
+          <Button onClick={() => window.open(`/report/${kundali.id}/print?autoprint=1`, '_blank')}>
+            {t('report.downloadPdf')}
           </Button>
-          <Button onClick={() => window.print()}>{t('report.downloadPdf')}</Button>
         </div>
       </div>
       <KundaliReport kundali={kundali} />

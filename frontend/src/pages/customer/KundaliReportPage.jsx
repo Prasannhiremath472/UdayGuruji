@@ -45,6 +45,12 @@ export default function KundaliReportPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, accessToken]);
 
+  const openPrintView = () => {
+    const qs = new URLSearchParams({ autoprint: '1' });
+    if (accessToken) qs.set('accessToken', accessToken);
+    window.open(`/report/${id}/print?${qs}`, '_blank');
+  };
+
   if (loading) return <LoadingState />;
   if (error || !kundali) return <ErrorState message={error} onRetry={load} />;
 
@@ -99,12 +105,9 @@ export default function KundaliReportPage() {
   return (
     <div className="kundali-report-page">
       <div className="report-toolbar no-print">
-        <Button variant="secondary" onClick={() => window.print()}>
-          {t('report.printReport')}
-        </Button>
-        {/* Server-side PDF is unavailable on this host; the print dialog's
-            "Save as PDF" produces the same report. */}
-        <Button onClick={() => window.print()}>{t('report.downloadPdf')}</Button>
+        {/* Opens the chrome-less print route, which renders every section
+            one after another (the tabs here only show one at a time). */}
+        <Button onClick={openPrintView}>{t('report.downloadPdf')}</Button>
       </div>
       <Tabs tabs={tabs} />
     </div>
