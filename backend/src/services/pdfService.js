@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const puppeteer = require('puppeteer-core');
 const chromium = require('@sparticuz/chromium');
 const logger = require('../utils/logger');
@@ -5,11 +7,34 @@ const { ApiError } = require('../utils/apiResponse');
 
 let browserPromise = null;
 
-// Bundled Chromium: shared hosting has no system Chrome or its libraries.
+// Bundled Chromium: shared hosting has no system Chrome or its libraries, and
+// /tmp is mounted noexec, so everything is extracted under the app directory.
+async function prepareChromium() {
+  if (process.env.PUPPETEER_EXECUTABLE_PATH) return process.env.PUPPETEER_EXECUTABLE_PATH;
+
+  const dir = path.join(process.cwd(), '.cache', 'chromium');
+  fs.mkdirSync(dir, { recursive: true });
+  process.env.TMPDIR = dir;
+
+  const lambdafs = require('@sparticuz/chromium/build/lambdafs').default;
+  const binDir = path.join(path.dirname(require.resolve('@sparticuz/chromium/package.json')), 'bin');
+  const [executablePath] = await Promise.all([
+    lambdafs.inflate(path.join(binDir, 'chromium.br')),
+    lambdafs.inflate(path.join(binDir, 'fonts.tar.br')),
+    lambdafs.inflate(path.join(binDir, 'swiftshader.tar.br')),
+    lambdafs.inflate(path.join(binDir, 'al2023.tar.br')),
+  ]);
+
+  process.env.FONTCONFIG_PATH = path.join(dir, 'fonts');
+  process.env.LD_LIBRARY_PATH = [path.join(dir, 'al2023', 'lib'), process.env.LD_LIBRARY_PATH]
+    .filter(Boolean)
+    .join(':');
+  return executablePath;
+}
+
 function getBrowser() {
   if (!browserPromise) {
-    browserPromise = chromium
-      .executablePath()
+    browserPromise = prepareChromium()
       .then((executablePath) =>
         puppeteer.launch({
           executablePath,
